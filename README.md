@@ -212,7 +212,7 @@ yarn add react-split-pane@next
 Usage
 
 ```jsx
-import SplitPane, { Pane } from 'react-split-pane';
+import { SplitPane, Pane } from 'react-split-pane';
 
 <SplitPane split="vertical">
   <Pane initialSize="200px">You can use a Pane component</Pane>

@@ -2,7 +2,7 @@ import { render, findDOMNode } from 'react-dom';
 import chai from 'chai';
 import spies from 'chai-spies';
 import ReactTestUtils from 'react-dom/test-utils';
-import SplitPane from '../../src/SplitPane';
+import { SplitPane } from '../../src/SplitPane';
 import Resizer from '../../src/Resizer';
 import Pane from '../../src/Pane';
 
@@ -37,17 +37,17 @@ export default (jsx, renderToDom = false) => {
 
   const findBottomPane = () => findPanes()[1];
 
-  const findPaneByOrder = paneString =>
+  const findPaneByOrder = (paneString) =>
     paneString === 'first' ? findTopPane() : findBottomPane();
 
   const findResizer = () =>
     ReactTestUtils.scryRenderedComponentsWithType(splitPane, Resizer);
 
-  const updateComponent = newJsx =>
+  const updateComponent = (newJsx) =>
     render(newJsx, findDOMNode(splitPane).parentNode);
 
   const assertStyles = (componentName, actualStyles, expectedStyles) => {
-    Object.keys(expectedStyles).forEach(prop => {
+    Object.keys(expectedStyles).forEach((prop) => {
       // console.log(`${prop}: '${actualStyles[prop]}',`);
       if (expectedStyles[prop] && expectedStyles[prop] !== '') {
         // console.log(`${prop}: '${actualStyles[prop]}',`);
@@ -82,7 +82,7 @@ export default (jsx, renderToDom = false) => {
     return resizerNode.getBoundingClientRect();
   };
 
-  const calculateMouseMove = mousePositionDifference => {
+  const calculateMouseMove = (mousePositionDifference) => {
     const resizerPosition = getResizerPosition();
     const mouseMove = {
       start: {
@@ -104,7 +104,7 @@ export default (jsx, renderToDom = false) => {
     return mouseMove;
   };
 
-  const simulateDragAndDrop = mousePositionDifference => {
+  const simulateDragAndDrop = (mousePositionDifference) => {
     const mouseMove = calculateMouseMove(mousePositionDifference);
     component.onMouseDown(mouseMove.start);
     component.onMouseMove(mouseMove.end);
@@ -155,7 +155,7 @@ export default (jsx, renderToDom = false) => {
 
     assertPaneContents(expectedContents) {
       const panes = findPanes();
-      const values = panes.map(pane => findDOMNode(pane).textContent);
+      const values = panes.map((pane) => findDOMNode(pane).textContent);
       expect(values).to.eql(expectedContents, 'Incorrect contents for Pane');
       return this;
     },

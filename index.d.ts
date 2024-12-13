@@ -55,8 +55,6 @@ declare class SplitPane extends React.Component<
   static defaultProps: SplitPaneProps;
 }
 
-export default SplitPane;
-
 export type PaneProps = {
   className?: string;
   size?: Size;
@@ -67,4 +65,4 @@ export type PaneProps = {
 
 declare class Pane extends React.PureComponent<PaneProps> {}
 
-export { Pane };
+export { SplitPane, Pane };

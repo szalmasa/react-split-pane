@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SplitPane from '../src/SplitPane';
+import { SplitPane } from '../src/SplitPane';
 import asserter from './assertions/Asserter';
 
 describe('Vertical SplitPane', () => {

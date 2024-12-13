@@ -2,7 +2,7 @@ import React, { StrictMode } from 'react';
 import chai from 'chai';
 import spies from 'chai-spies';
 
-import SplitPane from '../src/SplitPane';
+import { SplitPane } from '../src/SplitPane';
 import asserter from './assertions/Asserter';
 
 chai.use(spies);
@@ -170,7 +170,7 @@ describe('Component updates', () => {
         return <div>{this.props.children}</div>;
       }
     }
-    const paneWithWidth = size => (
+    const paneWithWidth = (size) => (
       <Div>
         <StrictMode>
           <SplitPane primary="first" size={size}>
