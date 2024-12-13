@@ -37,8 +37,6 @@ declare class SplitPane extends React.Component<
   SplitPaneProps,
   SplitPaneState
 > {
-  constructor();
-
   onMouseDown(event: MouseEvent): void;
 
   onTouchStart(event: TouchEvent): void;
