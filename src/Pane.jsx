@@ -1,8 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import stylePropType from 'react-style-proptype';
 
-class Pane extends React.PureComponent {
+export class Pane extends React.PureComponent {
   render() {
     const {
       children,
@@ -40,16 +38,3 @@ class Pane extends React.PureComponent {
     );
   }
 }
-
-Pane.propTypes = {
-  className: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
-  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  split: PropTypes.oneOf(['vertical', 'horizontal']),
-  style: stylePropType,
-  eleRef: PropTypes.func,
-};
-
-Pane.defaultProps = {};
-
-export default Pane;

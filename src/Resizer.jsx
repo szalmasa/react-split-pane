@@ -1,10 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import stylePropType from 'react-style-proptype';
 
 export const RESIZER_DEFAULT_CLASSNAME = 'Resizer';
 
-class Resizer extends React.Component {
+export class Resizer extends React.Component {
   render() {
     const {
       className,
@@ -50,20 +48,6 @@ class Resizer extends React.Component {
   }
 }
 
-Resizer.propTypes = {
-  className: PropTypes.string.isRequired,
-  onClick: PropTypes.func,
-  onDoubleClick: PropTypes.func,
-  onMouseDown: PropTypes.func.isRequired,
-  onTouchStart: PropTypes.func.isRequired,
-  onTouchEnd: PropTypes.func.isRequired,
-  split: PropTypes.oneOf(['vertical', 'horizontal']),
-  style: stylePropType,
-  resizerClassName: PropTypes.string.isRequired,
-};
-
 Resizer.defaultProps = {
   resizerClassName: RESIZER_DEFAULT_CLASSNAME,
 };
-
-export default Resizer;

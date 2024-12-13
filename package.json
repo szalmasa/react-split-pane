@@ -49,9 +49,7 @@
     }
   },
   "dependencies": {
-    "prop-types": "^15.7.2",
-    "react-lifecycles-compat": "^3.0.4",
-    "react-style-proptype": "^3.2.2"
+    "react-lifecycles-compat": "^3.0.4"
   },
   "devDependencies": {
     "@sanity/eslint-config-studio": "^5.0.0",
