@@ -1,15 +1,26 @@
 {
   "name": "@rexxars/react-split-pane",
   "description": "React split-pane component",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.esm.js",
-  "source": "src/index.js",
-  "types": "index.d.ts",
+  "version": "0.1.93",
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
+    },
+    "./styles.css": "./src/styles.css",
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist",
-    "index.d.ts"
+    "src"
   ],
-  "version": "0.1.93",
   "repository": {
     "type": "git",
     "url": "https://github.com/rexxars/react-split-pane"
@@ -29,10 +40,12 @@
   ],
   "scripts": {
     "prebuild": "npm run clean",
-    "build": "rollup -c",
-    "build:watch": "rollup -c --watch",
-    "clean": "rimraf dist",
+    "build": "npm run pkg:build npm run pkg:check",
     "dev": "vite dev",
+    "pkg:build": "pkg build --strict",
+    "pkg:check": "pkg check --strict",
+    "pkg:watch": "pkg watch --strict",
+    "clean": "rimraf dist",
     "test": "vitest run",
     "test:watch": "vitest --watch",
     "test:coverage": "vitest run --coverage",
@@ -41,6 +54,7 @@
     "prepublishOnly": "npm run test && npm run build",
     "test:browser": "vitest --workspace=vitest.workspace.js"
   },
+  "browserslist": "extends @sanity/browserslist-config",
   "husky": {
     "hooks": {
       "pre-commit": "pretty-quick --staged"
@@ -48,6 +62,7 @@
   },
   "devDependencies": {
     "@sanity/eslint-config-studio": "^5.0.0",
+    "@sanity/pkg-utils": "^6.12.0",
     "@types/react": "^19",
     "@vitejs/plugin-react": "^4.3.4",
     "@vitest/browser": "^2.1.8",
