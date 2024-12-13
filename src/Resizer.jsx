@@ -24,22 +24,22 @@ class Resizer extends React.Component {
         role="presentation"
         className={classes.join(' ')}
         style={style}
-        onMouseDown={event => onMouseDown(event)}
-        onTouchStart={event => {
+        onMouseDown={(event) => onMouseDown(event)}
+        onTouchStart={(event) => {
           event.preventDefault();
           onTouchStart(event);
         }}
-        onTouchEnd={event => {
+        onTouchEnd={(event) => {
           event.preventDefault();
           onTouchEnd(event);
         }}
-        onClick={event => {
+        onClick={(event) => {
           if (onClick) {
             event.preventDefault();
             onClick(event);
           }
         }}
-        onDoubleClick={event => {
+        onDoubleClick={(event) => {
           if (onDoubleClick) {
             event.preventDefault();
             onDoubleClick(event);

@@ -1,3 +1,36 @@
+html,
+body,
+#root {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  display: flex;
+}
+
+#fixture {
+  position: relative;
+  flex: 1;
+  background: #f0f0f0;
+}
+
+nav ul,
+nav li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav li {
+  margin: 10px 0;
+}
+
+nav {
+  border-right: 1px solid #ccc;
+}
+
 .Resizer {
   background: #000;
   opacity: 0.2;
