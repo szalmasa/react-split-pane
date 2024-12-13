@@ -12,7 +12,6 @@ function unFocus(document, window) {
   } else {
     try {
       window.getSelection().removeAllRanges();
-      // eslint-disable-next-line no-empty
     } catch (e) {}
   }
 }
@@ -144,7 +143,6 @@ class SplitPane extends React.Component {
               return;
             }
             // Integer division
-            // eslint-disable-next-line no-bitwise
             positionDelta = ~~(positionDelta / step) * step;
           }
           let sizeDelta = isPrimaryFirst ? positionDelta : -positionDelta;
