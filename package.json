@@ -1,5 +1,5 @@
 {
-  "name": "react-split-pane",
+  "name": "@rexxars/react-split-pane",
   "description": "React split-pane component",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
@@ -9,7 +9,7 @@
     "dist",
     "index.d.ts"
   ],
-  "version": "0.1.92",
+  "version": "0.1.93",
   "repository": {
     "type": "git",
     "url": "https://github.com/tomkp/react-split-pane"
@@ -89,8 +89,8 @@
     "parcel-bundler": "^1.12.4",
     "prettier": "2.0.5",
     "pretty-quick": "^2.0.1",
-    "react": ">=15",
-    "react-dom": "^16.0.0-0",
+    "react": "^18",
+    "react-dom": "^18",
     "react-router-dom": "^5.1.2",
     "rimraf": "^3.0.0",
     "rollup": "^2.3.4",
@@ -100,7 +100,7 @@
     "standard-version": "^7.0.0"
   },
   "peerDependencies": {
-    "react": "^16.0.0-0",
-    "react-dom": "^16.0.0-0"
+    "react": "^18 || ^19",
+    "react-dom": "^18 || ^19"
   }
 }
