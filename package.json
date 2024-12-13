@@ -12,13 +12,13 @@
   "version": "0.1.93",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tomkp/react-split-pane"
+    "url": "https://github.com/rexxars/react-split-pane"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tomkp/react-split-pane"
+    "url": "https://github.com/rexxars/react-split-pane"
   },
-  "homepage": "https://github.com/tomkp/react-split-pane",
+  "homepage": "https://github.com/rexxars/react-split-pane",
   "author": "tomkp <tom@tomkp.com>",
   "keywords": [
     "react",
