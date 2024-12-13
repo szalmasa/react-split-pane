@@ -1,6 +1,5 @@
 /* global document, window */
 import React from 'react';
-import { polyfill } from 'react-lifecycles-compat';
 
 import { Pane } from './Pane';
 import { Resizer, RESIZER_DEFAULT_CLASSNAME } from './Resizer';
@@ -355,5 +354,3 @@ SplitPane.defaultProps = {
   pane1ClassName: '',
   pane2ClassName: '',
 };
-
-polyfill(SplitPane);
