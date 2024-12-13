@@ -2,11 +2,11 @@ Thanks for contributing to react-split-pane!
 
 **Before submitting a pull request,** please complete the following checklist:
 
-- [ ] The existing test suites (`yarn run test`) all pass
+- [ ] The existing test suites (`npm test`) all pass
 - [ ] For any new features or bug fixes, both positive and negative test cases have been added
 - [ ] For any new features, documentation has been added
 - [ ] For any documentation changes, the text has been proofread and is clear to both experienced users and beginners.
-- [ ] Format your code with [prettier](https://github.com/prettier/prettier) (`yarn run prettier`).
+- [ ] Format your code with [prettier](https://github.com/prettier/prettier) (`npm run prettier`).
 
 Here is a short checklist of additional things to keep in mind before submitting:
 

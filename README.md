@@ -1,31 +1,28 @@
 # React Split Pane
 
-[![NPM version](https://img.shields.io/npm/v/react-split-pane.svg?style=flat)](https://www.npmjs.com/package/react-split-pane)
-![NPM license](https://img.shields.io/npm/l/react-split-pane.svg?style=flat)
-[![NPM total downloads](https://img.shields.io/npm/dt/react-split-pane.svg?style=flat)](https://npmcharts.com/compare/react-split-pane?minimal=true)
-[![NPM monthly downloads](https://img.shields.io/npm/dm/react-split-pane.svg?style=flat)](https://npmcharts.com/compare/react-split-pane?minimal=true)
-![Build Test](https://github.com/tomkp/react-split-pane/workflows/Build%20Test/badge.svg)
-[![Coverage Status](https://img.shields.io/coveralls/tomkp/react-split-pane/master.svg?style=flat)](https://coveralls.io/r/tomkp/react-split-pane)
+[![NPM version](https://img.shields.io/npm/v/@rexxars/react-split-pane.svg?style=flat)](https://www.npmjs.com/package/@rexxars/react-split-pane)
 
 Split-Pane React component, can be nested or split vertically or horizontally!
+
+**Forked version of [tomkp/react-split-pane](https://github.com/tomkp/react-split-pane)**
+
+This version supports React 19 and has dropped some other features. Use at your own peril.
 
 ## Installing
 
 ```sh
-npm install react-split-pane
-
-# or if you use yarn
-
-yarn add react-split-pane
+npm install @rexxars/react-split-pane
 ```
 
 ## Example Usage
 
 ```jsx
+import { SplitPane } from '@rexxars/react-split-pane';
+
 <SplitPane split="vertical" minSize={50} defaultSize={100}>
   <div />
   <div />
-</SplitPane>
+</SplitPane>;
 ```
 
 ```jsx
@@ -190,46 +187,6 @@ Thanks to `background-clip: padding-box;` for making transparent borders possibl
   border-color: transparent;
 }
 ```
-
-## New Version
-
-**I'm working on an updated version of this library, and looking for help:**
-
-Demo
-
-http://react-split-pane-v2.surge.sh/
-
-Install
-
-```sh
-npm install react-split-pane@next
-
-# or if you use yarn
-
-yarn add react-split-pane@next
-```
-
-Usage
-
-```jsx
-import { SplitPane, Pane } from 'react-split-pane';
-
-<SplitPane split="vertical">
-  <Pane initialSize="200px">You can use a Pane component</Pane>
-  <div>or you can use a plain old div</div>
-  <Pane initialSize="25%" minSize="10%" maxSize="500px">
-    Using a Pane allows you to specify any constraints directly
-  </Pane>
-</SplitPane>;
-```
-
-Pull request
-
-https://github.com/tomkp/react-split-pane/pull/240
-
-More discussion
-
-https://github.com/tomkp/react-split-pane/issues/233
 
 ## Contributing
 

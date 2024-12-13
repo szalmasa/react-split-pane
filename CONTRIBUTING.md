@@ -95,7 +95,7 @@ Follow this process if you'd like your work considered for inclusion in the proj
 3. Install/update dependencies:
 
    ```bash
-   yarn install
+   npm install
    ```
 
 4. Create a new topic branch (off the main project development branch) to
@@ -132,24 +132,23 @@ Follow this process if you'd like your work considered for inclusion in the proj
 
 ## Running Local Demo
 
-You can run the local demo with yarn like so:
+You can run the local demo like so:
 
 ```bash
 cd <root>
-yarn build
-yarn website:start
+npm run dev
 ```
 
-The local app will then be available at http://localhost:3000
+The local app will then be available at http://localhost:5174
 
 <a name="running-tests"></a>
 
 ## Running Tests
 
 All unit tests must pass before a pull request will be approved.
-You can run unit tests with yarn like so:
+You can run unit tests with npm like so:
 
 ```bash
 cd <root>
-yarn test
+npm test
 ```
