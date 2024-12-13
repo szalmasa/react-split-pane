@@ -19,7 +19,7 @@ export class Resizer extends React.Component {
 
     return (
       <span
-        role="presentation"
+        role="separator"
         className={classes.join(' ')}
         style={style}
         onMouseDown={(event) => onMouseDown(event)}

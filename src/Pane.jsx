@@ -32,7 +32,12 @@ export class Pane extends React.PureComponent {
     style = Object.assign({}, style, styleProps || {});
 
     return (
-      <div ref={eleRef} className={classes.join(' ')} style={style}>
+      <div
+        role="region"
+        ref={eleRef}
+        className={classes.join(' ')}
+        style={style}
+      >
         {children}
       </div>
     );

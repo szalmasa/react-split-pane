@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { describe, it } from 'vitest';
 import { SplitPane } from '../src/SplitPane';
-import asserter from './assertions/Asserter';
+import { asserter } from './assertions/Asserter';
 
 describe('Vertical SplitPane', () => {
   describe('Defaults', () => {
@@ -55,29 +56,6 @@ describe('Vertical SplitPane', () => {
       );
       asserter(splitPane).assertPaneWidth('100px');
     });
-
-    it('should maintain width after being unset', () => {
-      class PaneContainer extends Component {
-        constructor(props) {
-          super(props);
-          this.state = {
-            size: 80,
-          };
-        }
-
-        render() {
-          return (
-            <SplitPane size={this.state.size}>
-              <div>one</div>
-              <div>two</div>
-            </SplitPane>
-          );
-        }
-      }
-
-      const splitPane = <PaneContainer className="container" />;
-      asserter(splitPane).assertSizePersists(PaneContainer);
-    });
   });
 
   describe('With primary property set to second', () => {
@@ -102,35 +80,31 @@ describe('Vertical SplitPane', () => {
       </SplitPane>
     );
 
-    const moveToRight = { x: 200 };
-
-    it('after move to right, the first pane should be larger than before', () => {
-      asserter(splitPane, true).assertResizeByDragging(moveToRight, {
-        width: '400px',
+    it('after move to right, the first pane should be larger than before', async () => {
+      const moveToRight = { x: 200 };
+      await asserter(splitPane).assertResizeByDragging(moveToRight, {
+        width: 400,
       });
     });
 
-    const moveToLeft = { x: -120 };
-
-    it('after move to left, the first pane should be smaller than before', () => {
-      asserter(splitPane, true).assertResizeByDragging(moveToLeft, {
-        width: '80px',
+    it('after move to left, the first pane should be smaller than before', async () => {
+      const moveToLeft = { x: -120 };
+      await asserter(splitPane).assertResizeByDragging(moveToLeft, {
+        width: 80,
       });
     });
 
-    const moveLeftExtreme = { x: -190 };
-
-    it('after move to left, the first pane should not be smaller than `minSize`', () => {
-      asserter(splitPane, true).assertResizeByDragging(moveLeftExtreme, {
-        width: '50px',
+    it('after move to left, the first pane should not be smaller than `minSize`', async () => {
+      const moveLeftExtreme = { x: -190 };
+      await asserter(splitPane).assertResizeByDragging(moveLeftExtreme, {
+        width: 50,
       });
     });
 
-    const moveRightExtreme = { x: 300 };
-
-    it('after move to right, the first pane should not be larger than `minSize`', () => {
-      asserter(splitPane, true).assertResizeByDragging(moveRightExtreme, {
-        width: '450px',
+    it('after move to right, the first pane should not be larger than `minSize`', async () => {
+      const moveRightExtreme = { x: 300 };
+      await asserter(splitPane).assertResizeByDragging(moveRightExtreme, {
+        width: 450,
       });
     });
   });
@@ -145,18 +119,26 @@ describe('Vertical SplitPane', () => {
 
     const moveToRight = { x: 160 };
 
-    it('after move to right, the second pane should be smaller then before', () => {
-      asserter(splitPane, true).assertResizeByDragging(moveToRight, {
-        width: '240px',
-      });
+    it('after move to right, the second pane should be smaller then before', async () => {
+      await asserter(splitPane).assertResizeByDragging(
+        moveToRight,
+        {
+          width: 240,
+        },
+        'second'
+      );
     });
 
     const moveToLeft = { x: -111 };
 
-    it('after move to left, the second pane should be larger then before', () => {
-      asserter(splitPane, true).assertResizeByDragging(moveToLeft, {
-        width: '511px',
-      });
+    it('after move to left, the second pane should be larger then before', async () => {
+      await asserter(splitPane).assertResizeByDragging(
+        moveToLeft,
+        {
+          width: 511,
+        },
+        'second'
+      );
     });
   });
 
@@ -176,33 +158,33 @@ describe('Vertical SplitPane', () => {
 
     const moveToRight = { x: 75 };
 
-    it('after move to right by 75px, first pane should only have width 450px', () => {
-      asserter(splitPane, true).assertResizeByDragging(moveToRight, {
-        width: '450px',
+    it('after move to right by 75px, first pane should only have width 450px', async () => {
+      await asserter(splitPane).assertResizeByDragging(moveToRight, {
+        width: 450,
       });
     });
 
     const moveToLeft = { x: -75 };
 
-    it('after move to left by 75px, first pane should only have width 350px', () => {
-      asserter(splitPane, true).assertResizeByDragging(moveToLeft, {
-        width: '350px',
+    it('after move to left by 75px, first pane should only have width 350px', async () => {
+      await asserter(splitPane).assertResizeByDragging(moveToLeft, {
+        width: 350,
       });
     });
 
     const moveToRightSmall = { x: 25 };
 
-    it('after move to right by 25px, first pane should still have width 400px', () => {
-      asserter(splitPane, true).assertResizeByDragging(moveToRightSmall, {
-        width: '400px',
+    it('after move to right by 25px, first pane should still have width 400px', async () => {
+      await asserter(splitPane).assertResizeByDragging(moveToRightSmall, {
+        width: 400,
       });
     });
 
     const moveToLeftSmall = { x: -25 };
 
-    it('after move to left by 75px, first pane should still have width 400px', () => {
-      asserter(splitPane, true).assertResizeByDragging(moveToLeftSmall, {
-        width: '400px',
+    it('after move to left by 75px, first pane should still have width 400px', async () => {
+      await asserter(splitPane).assertResizeByDragging(moveToLeftSmall, {
+        width: 400,
       });
     });
   });

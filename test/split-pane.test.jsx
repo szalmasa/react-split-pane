@@ -1,11 +1,8 @@
 import React, { StrictMode } from 'react';
-import chai from 'chai';
-import spies from 'chai-spies';
+import { describe, it, vi } from 'vitest';
 
 import { SplitPane } from '../src/SplitPane';
-import asserter from './assertions/Asserter';
-
-chai.use(spies);
+import { asserter } from './assertions/Asserter';
 
 describe('Default SplitPane', () => {
   const splitPane = (
@@ -16,15 +13,18 @@ describe('Default SplitPane', () => {
   );
 
   it('should render the child panes', () => {
-    asserter(splitPane).assertPaneContents(['one', 'two']);
+    const assert = asserter(splitPane);
+    assert.assertPaneContents(['one', 'two']);
   });
 
   it('should have vertical orientation', () => {
-    asserter(splitPane).assertOrientation('vertical');
+    const assert = asserter(splitPane);
+    assert.assertOrientation('vertical');
   });
 
   it('should contain a Resizer', () => {
-    asserter(splitPane).assertContainsResizer();
+    const assert = asserter(splitPane);
+    assert.assertContainsResizer();
   });
 });
 
@@ -37,13 +37,14 @@ describe('SplitPane can have a specific class', () => {
   );
 
   it('should have the specified class', () => {
-    asserter(splitPane).assertSplitPaneClass('some-class');
+    const assert = asserter(splitPane);
+    assert.assertSplitPaneClass('some-class');
   });
 });
 
 describe('SplitPane can have resizing callbacks', () => {
-  const onDragStartedCallback = chai.spy(() => {});
-  const onDragFinishedCallback = chai.spy(() => {});
+  const onDragStartedCallback = vi.fn(() => {});
+  const onDragFinishedCallback = vi.fn(() => {});
 
   const splitPane = (
     <SplitPane
@@ -56,8 +57,9 @@ describe('SplitPane can have resizing callbacks', () => {
     </SplitPane>
   );
 
-  it('should call callbacks on resizing', () => {
-    asserter(splitPane).assertResizeCallbacks(
+  it('should call callbacks on resizing', async () => {
+    const assert = asserter(splitPane);
+    await assert.assertResizeCallbacks(
       onDragStartedCallback,
       onDragFinishedCallback
     );
@@ -73,11 +75,13 @@ describe('Internal Panes have class', () => {
   );
 
   it('should have the specified classname', () => {
-    asserter(splitPane).assertPaneClasses('some-class', 'some-class');
+    const assert = asserter(splitPane);
+    assert.assertPaneClasses('some-class', 'some-class');
   });
 
   it('should have the default classname', () => {
-    asserter(splitPane).assertPaneClasses('Pane1', 'Pane2');
+    const assert = asserter(splitPane);
+    assert.assertPaneClasses('Pane1', 'Pane2');
   });
 });
 
@@ -90,11 +94,13 @@ describe('Top/Left Pane have class', () => {
   );
 
   it('should have the specified classname', () => {
-    asserter(splitPane).assertTopPaneClasses('some-class');
+    const assert = asserter(splitPane);
+    assert.assertTopPaneClasses('some-class');
   });
 
   it('should have the default classname', () => {
-    asserter(splitPane).assertTopPaneClasses('Pane1');
+    const assert = asserter(splitPane);
+    assert.assertTopPaneClasses('Pane1');
   });
 });
 
@@ -107,11 +113,13 @@ describe('Bottom/Right Pane have class', () => {
   );
 
   it('should have the specified classname', () => {
-    asserter(splitPane).assertBottomPaneClasses('some-class');
+    const assert = asserter(splitPane);
+    assert.assertBottomPaneClasses('some-class');
   });
 
   it('should have the default classname', () => {
-    asserter(splitPane).assertBottomPaneClasses('Pane2');
+    const assert = asserter(splitPane);
+    assert.assertBottomPaneClasses('Pane2');
   });
 });
 
@@ -124,41 +132,37 @@ describe('Internal Resizer have class', () => {
   );
 
   it('should have the specified classname', () => {
-    asserter(splitPane).assertResizerClasses('some-class');
+    const assert = asserter(splitPane);
+    assert.assertResizerClasses('some-class');
   });
 
   it('should have the default classname', () => {
-    asserter(splitPane).assertResizerClasses('Resizer');
+    const assert = asserter(splitPane);
+    assert.assertResizerClasses('Resizer');
   });
 });
 
 describe('Component updates', () => {
   const splitPane1 = (
-    <SplitPane primary="first">
+    <SplitPane primary="first" debug>
       <div>one</div>
       <div>two</div>
     </SplitPane>
   );
   const splitPane2 = (
-    <SplitPane primary="second">
+    <SplitPane primary="second" debug>
       <div>one</div>
       <div>two</div>
     </SplitPane>
   );
   it('unsets the width on the non-primary panel when first', () => {
-    asserter(splitPane1).assertPrimaryPanelChange(
-      splitPane2,
-      'first',
-      'second'
-    );
+    const assert = asserter(splitPane1);
+    assert.assertPrimaryPanelChange(splitPane2, 'first', 'second');
   });
 
   it('unsets the width on the non-primary panel when second', () => {
-    asserter(splitPane2).assertPrimaryPanelChange(
-      splitPane1,
-      'second',
-      'first'
-    );
+    const assert = asserter(splitPane2);
+    assert.assertPrimaryPanelChange(splitPane1, 'second', 'first');
   });
 
   it('updates the width of first panel when updating size, in strict mode (#309)', () => {
@@ -181,9 +185,7 @@ describe('Component updates', () => {
       </Div>
     );
 
-    asserter(paneWithWidth(100)).assertPaneWidthChange(
-      paneWithWidth(200),
-      '200px'
-    );
+    const assert = asserter(paneWithWidth(100));
+    assert.assertPaneWidthChange(paneWithWidth(200), '200px');
   });
 });

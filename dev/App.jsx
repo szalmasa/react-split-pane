@@ -17,7 +17,7 @@ import Subcomponent from './Subcomponent';
 
 function App() {
   const [{ fixture: Fixture }, setFixture] = useState({
-    fixture: () => <div style={{ padding: 10 }}>Select fixture</div>,
+    fixture: BasicHorizontal,
   });
 
   return (

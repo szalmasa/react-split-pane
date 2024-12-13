@@ -115,86 +115,93 @@ export class SplitPane extends React.Component {
   }
 
   onTouchMove(event) {
-    const { allowResize, maxSize, minSize, onChange, split, step } = this.props;
-    const { active, position } = this.state;
+    if (!this.state.active || !this.props.allowResize) {
+      return;
+    }
 
-    if (allowResize && active) {
-      unFocus(document, window);
-      const isPrimaryFirst = this.props.primary === 'first';
-      const ref = isPrimaryFirst ? this.pane1 : this.pane2;
-      const ref2 = isPrimaryFirst ? this.pane2 : this.pane1;
-      if (ref) {
-        const node = ref;
-        const node2 = ref2;
+    const { maxSize, minSize, onChange, split, step } = this.props;
+    const { position } = this.state;
 
-        if (node.getBoundingClientRect) {
-          const width = node.getBoundingClientRect().width;
-          const height = node.getBoundingClientRect().height;
-          const current =
-            split === 'vertical'
-              ? event.touches[0].clientX
-              : event.touches[0].clientY;
-          const size = split === 'vertical' ? width : height;
-          let positionDelta = position - current;
-          if (step) {
-            if (Math.abs(positionDelta) < step) {
-              return;
-            }
-            // Integer division
-            positionDelta = ~~(positionDelta / step) * step;
-          }
-          let sizeDelta = isPrimaryFirst ? positionDelta : -positionDelta;
+    unFocus(document, window);
+    const isPrimaryFirst = this.props.primary === 'first';
+    const ref = isPrimaryFirst ? this.pane1 : this.pane2;
+    const ref2 = isPrimaryFirst ? this.pane2 : this.pane1;
 
-          const pane1Order = parseInt(window.getComputedStyle(node).order);
-          const pane2Order = parseInt(window.getComputedStyle(node2).order);
-          if (pane1Order > pane2Order) {
-            sizeDelta = -sizeDelta;
-          }
+    if (!ref || !ref.getBoundingClientRect) {
+      return;
+    }
 
-          let newMaxSize = maxSize;
-          if (maxSize !== undefined && maxSize <= 0) {
-            const splitPane = this.splitPane;
-            if (split === 'vertical') {
-              newMaxSize = splitPane.getBoundingClientRect().width + maxSize;
-            } else {
-              newMaxSize = splitPane.getBoundingClientRect().height + maxSize;
-            }
-          }
+    const node = ref;
+    const node2 = ref2;
 
-          let newSize = size - sizeDelta;
-          const newPosition = position - positionDelta;
+    const width = node.getBoundingClientRect().width;
+    const height = node.getBoundingClientRect().height;
+    const current =
+      split === 'vertical'
+        ? event.touches[0].clientX
+        : event.touches[0].clientY;
+    const size = split === 'vertical' ? width : height;
 
-          if (newSize < minSize) {
-            newSize = minSize;
-          } else if (maxSize !== undefined && newSize > newMaxSize) {
-            newSize = newMaxSize;
-          } else {
-            this.setState({
-              position: newPosition,
-              resized: true,
-            });
-          }
+    let positionDelta = position - current;
+    if (step) {
+      if (Math.abs(positionDelta) < step) {
+        return;
+      }
+      // Integer division
+      positionDelta = ~~(positionDelta / step) * step;
+    }
+    let sizeDelta = isPrimaryFirst ? positionDelta : -positionDelta;
 
-          if (onChange) onChange(newSize);
+    const pane1Order = parseInt(window.getComputedStyle(node).order);
+    const pane2Order = parseInt(window.getComputedStyle(node2).order);
+    if (pane1Order > pane2Order) {
+      sizeDelta = -sizeDelta;
+    }
 
-          this.setState({
-            draggedSize: newSize,
-            [isPrimaryFirst ? 'pane1Size' : 'pane2Size']: newSize,
-          });
-        }
+    let newMaxSize = maxSize;
+    if (maxSize !== undefined && maxSize <= 0) {
+      const splitPane = this.splitPane;
+      if (split === 'vertical') {
+        newMaxSize = splitPane.getBoundingClientRect().width + maxSize;
+      } else {
+        newMaxSize = splitPane.getBoundingClientRect().height + maxSize;
       }
     }
+
+    let newSize = size - sizeDelta;
+    const newPosition = position - positionDelta;
+
+    if (newSize < minSize) {
+      newSize = minSize;
+    } else if (maxSize !== undefined && newSize > newMaxSize) {
+      newSize = newMaxSize;
+    } else {
+      this.setState({
+        position: newPosition,
+        resized: true,
+      });
+    }
+
+    if (onChange) onChange(newSize);
+
+    this.setState({
+      draggedSize: newSize,
+      [isPrimaryFirst ? 'pane1Size' : 'pane2Size']: newSize,
+    });
   }
 
   onMouseUp() {
-    const { allowResize, onDragFinished } = this.props;
-    const { active, draggedSize } = this.state;
-    if (allowResize && active) {
-      if (typeof onDragFinished === 'function') {
-        onDragFinished(draggedSize);
-      }
-      this.setState({ active: false });
+    if (!this.state.active || !this.props.allowResize) {
+      return;
     }
+
+    const { onDragFinished } = this.props;
+    const { draggedSize } = this.state;
+
+    if (typeof onDragFinished === 'function') {
+      onDragFinished(draggedSize);
+    }
+    this.setState({ active: false });
   }
 
   // we have to check values since gDSFP is called on every render and more in StrictMode
@@ -298,6 +305,7 @@ export class SplitPane extends React.Component {
 
     return (
       <div
+        data-testid="split-pane"
         className={classes.join(' ')}
         ref={(node) => {
           this.splitPane = node;
