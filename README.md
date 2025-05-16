@@ -4,7 +4,7 @@
 
 Split-Pane React component, can be nested or split vertically or horizontally!
 
-**Forked version of [tomkp/react-split-pane](https://github.com/tomkp/react-split-pane)**
+**Forked version of [rexxars/react-split-pane](https://github.com/rexxars/react-split-pane)**
 
 This version supports React 19 and has dropped some other features. Use at your own peril.
 
